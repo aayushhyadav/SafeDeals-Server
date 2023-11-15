@@ -1,8 +1,8 @@
 const express = require("express")
-const geocode = require("../../server/utility/geocode")
-const cluster = require("../../server/model/cluster")
-const Store = require("../../server/model/store")
-const computeDistance = require("../computeDistance")
+const geocode = require("../utility/geocode")
+const cluster = require("../model/cluster")
+const Store = require("../model/store")
+const computeDistance = require("../utility/computeDistance")
 
 const router = express.Router()
 
@@ -114,4 +114,4 @@ router.get("/cityClusters", async (req, res) => {
   }
 })
 
-module.exports = {router}
+module.exports = {proximityRouter: router}

@@ -1,7 +1,7 @@
 const kMeans = require("node-kmeans")
 const Store = require("../model/store")
 const pythonScript = require("./execOptimumK")
-const computeDistance = require("../../proximity_server/computeDistance")
+const computeDistance = require("./computeDistance")
 const calDensity = require("./densityToEpsilonMap")
 
 /**
