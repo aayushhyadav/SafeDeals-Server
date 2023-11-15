@@ -1,7 +1,4 @@
 const spawn = require("child_process").spawn
-const {dirname} = require("path")
-
-const appDir = dirname(require.main.filename)
 
 /**
  *
@@ -13,11 +10,7 @@ const exec = async (lat, long) => {
   var k = 1,
     error
 
-  const process = spawn("python", [
-    appDir + "/server/utility/getOptimumK.py",
-    lat,
-    long,
-  ])
+  const process = spawn("python", ["./getOptimumK.py", lat, long])
 
   for await (const chunk of process.stdout) {
     k = chunk
