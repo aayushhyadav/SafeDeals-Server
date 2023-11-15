@@ -10,7 +10,7 @@ const exec = async (lat, long) => {
   var k = 1,
     error
 
-  const process = spawn("python", ["./getOptimumK.py", lat, long])
+  const process = spawn("python", ["../../api/index.py", lat, long])
 
   for await (const chunk of process.stdout) {
     k = chunk
