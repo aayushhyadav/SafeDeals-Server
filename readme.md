@@ -1,27 +1,23 @@
 # Hybrid Privacy Preservation for Location-Based Advertisement
 
-This application makes use of geo-indistinguishability for perturbing actual location coordinates of users before sending them to the server.
-Suppose, (x, y) are actual coordinates then (x + rcos(w), y + rsin(w)) are sent to the server. This helps in preserving location privacy of users.
-Amount of perturbation is controlled by the privacy budget.
-With the help of perturbed coordinates and area of retrieval specified by the user, advertisements from nearby stores are shown to the user.
+SafeDeals uses the [Geo-indistinguishability algorithm](https://arxiv.org/abs/1212.1984) for perturbing the actual location coordinates of users before sending them to the server. This helps in preserving the location privacy of users. The amount of perturbation is controlled by the privacy budget, computed
+using the business density (number of businesses per sq km). With the help of perturbed coordinates and the area of retrieval specified by the
+user, advertisements from nearby stores are shown to the user.
 
-The Chicago Groceries Stores dataset was used for testing the application. This dataset has information about 500 grocery stores.
-K-means clustering algorithm is used to generate clusters of these stores.
-Distances between perturbed coordinates and centroids of clusters are computed on the server to select the nearby stores.
+The [Chicago Grocery Stores](https://www.kaggle.com/datasets/chicago/chicago-grocery-stores-2013) dataset was used for testing the clustering feature. This dataset has information about 500 grocery stores. The k-means clustering algorithm is used to generate clusters. The distances between perturbed coordinates and centroids of clusters are computed on the server to select the nearby stores.
 
-Stores can post details about their advertisements using this application.
-Statistical information about customers is also provided to stores for enhancing their business strategies.
-It is assumed that information like gender and age-group of customers is shared by stores.
+<h4>Businesses can</h4>
 
-Analysts can query the database to gain insights into customer footfall by viewing the statistical data.
-To preserve customer privacy, noise is added to the results using the concept of differential privacy.
-Amount of noise is controlled by the privacy budget.
+- Post advertisements
+- Get statistical information like the number of users interested in their offers for planning business strategies
 
-The application is robust against localization attack and map-matching attack.
+<h4>Additional Privacy Aspects</h4>
 
-The jupyter notebook is just for visualizing the clustering algorithm.
+- To prevent privacy breaches via statistical data, noise is added to the results using the concept of differential privacy. The privacy budget controls the amount of noise added.
+- The application is robust against localization attacks and map-matching attacks.
 
-"npm run dev" -> starts the server.\
-"npm run start" -> initiates the frontend application.\
-make sure that a local instance of mongoDB is up and running.\
-APIs can be tested using postman.
+<h4>To start the app locally - </h4>
+
+- `npm run dev` -> starts the server.
+- Make sure that a local or production instance of MongoDB is up and running.
+- Ensure to set up a local `.env` file (Refer [Example ENV](https://github.com/aayushhyadav/SafeDeals-Server/blob/release/1.0.0/exampleENV.txt)).
