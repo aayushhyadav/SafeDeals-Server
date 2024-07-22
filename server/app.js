@@ -9,12 +9,6 @@ const adRouter = require("./routes/ad")
 const statsRouter = require("./routes/stats")
 const reviewRouter = require("./routes/review")
 const proximityRouter = require("./routes/checkProximity")
-const dotenv = require("dotenv")
-
-const envVar = dotenv.config()
-if (envVar.error) {
-  throw envVar.error
-}
 
 const app = express()
 const MONGO_URI = process.env.MONGO_URI

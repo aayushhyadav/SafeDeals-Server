@@ -1,10 +1,4 @@
 const jwt = require("jsonwebtoken")
-const dotenv = require("dotenv")
-
-const envVar = dotenv.config()
-if (envVar.error) {
-  throw envVar.error
-}
 
 const JWT_SECRET = process.env.JWT_SECRET
 

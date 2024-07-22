@@ -1,12 +1,6 @@
 const axios = require("axios")
 const nodeGeocoder = require("node-geocoder")
 const {stringify} = require("nodemon/lib/utils")
-const dotenv = require("dotenv")
-
-const envVar = dotenv.config()
-if (envVar.error) {
-  throw envVar.error
-}
 
 const API_KEY = process.env.GEOCODER_API_KEY
 const GEO_URL = "https://maps.googleapis.com/maps/api/geocode/json?address="
