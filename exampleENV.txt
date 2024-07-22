@@ -3,7 +3,6 @@
 */
 
 GENSEVPORT=<port number>
-PROXSEVPORT=<port number>
-MONGO_URI=<mongodb://127.0.0.1:27017/lba>
-GEOCODER_API_KEY=AIzaSyD-AAG8vaSUkZWygHlUflbtH-48_rzoEyk
-DB_PASSWORD=kad2021
+MONGO_URI=<uri>
+GEOCODER_API_KEY=<api key>
+DB_PASSWORD=<password>
