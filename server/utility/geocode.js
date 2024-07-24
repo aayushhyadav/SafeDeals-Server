@@ -19,8 +19,9 @@ const geocodeToCoords = async (address) => {
 
 const geocodeToCity = async (latitude, longitude) => {
   const options = {
-    provider: "openstreetmap",
+    provider: "google",
     httpAdapter: "https",
+    apiKey: API_KEY,
     formatter: "json",
   }
 
@@ -29,6 +30,7 @@ const geocodeToCity = async (latitude, longitude) => {
     const res = await geocoder.reverse({lat: latitude, lon: longitude})
     return res[0].city
   } catch (error) {
+    console.log(error)
     throw new Error("Reverse Geocoding failed!")
   }
 }
