@@ -6,7 +6,7 @@ const calDensity = (cluster) => {
     /*
      * mapping [0, 1] to [0.1, 0.5]
      * former range is the probability of guessing the correct store visited by the user
-     * for example num ber of businesses = 4, then P(correctly guessing) = 0.25
+     * for example number of businesses = 4, then P(correctly guessing) = 0.25
      * latter range is minimum probability of making an error
      * so if P(guessing) is low then minimum probability of making an error can be on the lower side
      */

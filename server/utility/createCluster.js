@@ -1,8 +1,9 @@
 const kMeans = require("node-kmeans")
 const Store = require("../model/store")
-const pythonScript = require("./execOptimumK")
 const computeDistance = require("./computeDistance")
 const calDensity = require("./densityToEpsilonMap")
+const {ENDPOINTS} = require("../commons/endpoints")
+const axios = require("axios")
 
 /**
  *
@@ -20,21 +21,25 @@ const create = async (cluster) => {
   }
 
   const vector = []
-  var lat = "",
-    long = "",
-    mean = 0
+  const lat = []
+  const long = []
+  var mean = 0
 
   stores.forEach((store) => {
     vector.push([store.latitude, store.longitude])
-    lat += store.latitude.toString() + ","
-    long += store.longitude.toString() + ","
+    lat.push(store.latitude)
+    long.push(store.longitude)
   })
 
-  lat = lat.substring(0, lat.length - 1)
-  long = long.substring(0, long.length - 1)
-
   if (stores.length > 1) {
-    numClusters = await pythonScript.exec(lat, long)
+    try {
+      numClusters = await axios.post(ENDPOINTS.GET_OPTIMUM_K, {
+        lat,
+        long,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   kMeans.clusterize(vector, {k: numClusters}, async (error, result) => {
