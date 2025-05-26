@@ -37,6 +37,7 @@ const create = async (cluster) => {
         lat,
         long,
       })
+      numClusters = numClusters?.data?.numClusters
     } catch (error) {
       console.log(error)
     }
