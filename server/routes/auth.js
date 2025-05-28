@@ -1,4 +1,6 @@
 const express = require("express")
+const bcrypt = require("bcrypt")
+
 const User = require("../model/user")
 const Store = require("../model/store")
 const Cluster = require("../model/cluster")
@@ -12,8 +14,13 @@ const router = express.Router()
 router.post("/userSignup", async (req, res) => {
   try {
     req.body.age = computeAge(req.body.dob)
+    
+    const saltRounds = 10
+    req.body.password = await bcrypt.hash(req.body.password, saltRounds)
+
     const user = new User.User(req.body)
     await user.save()
+
     res.status(201).send({user})
   } catch (error) {
     res.status(500).send({
@@ -29,11 +36,9 @@ router.post("/userLogin", async (req, res) => {
       : {}
 
     credentials.email = credentials.email ?? req.body.email
-    credentials.password = credentials.password ?? req.body.password
 
     const user = await User.User.findOne({
-      email: credentials.email,
-      password: credentials.password,
+      email: credentials.email
     })
 
     if (user == null) {
@@ -41,9 +46,15 @@ router.post("/userLogin", async (req, res) => {
       return
     }
 
+    bcrypt.compare(req.body.password, user.password, (err, result) => {
+      if (!result) {
+        return res.status(500).json({ Msg: "Please verify you email and password" });
+      }
+    });
+
     let jwtToken
     if (!req.body.sessionToken) {
-      jwtToken = generateJwt(credentials.email, credentials.password)
+      jwtToken = generateJwt(credentials.email, user.password)
     }
 
     const userDetails = {
